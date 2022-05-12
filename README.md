@@ -61,7 +61,54 @@
  </form>
  `````
  
- ## 
+ ## Formulario reativo
+ ````
+ novoUsuario!: FormaGroup
+ 
+ constructor(private formBuilder: FormBuilder){}
+ 
+ ngOnInit(): void {
+   this.novoUsuario = this.formBuilder.group({
+     email: ['', [
+     Validators.required
+     ]],
+     fullName: [''],
+     userName: [''],
+     password: [''],
+   })
+ }
+ 
+ cadastrar(){
+ // getRawValue() returna um objeto somente com o estado das variaveis
+  const novoUsuario = this.novoUsuario.getRawValue() as novoUsuario;
+ }
+ `````
+ 
+ ## Formulario reativo
+ ````
+ <form [formGroup]="novoUsuario" (ngSubmit)="cadastrar()">
+   <input type="text" placeholder="Nome" required formControlName="email">
+   <input type="text" placeholder="Nome" required formControlName="fullName">
+   <input type="text" placeholder="Nome" required formControlName="userName">
+   <input type="password" placeholder="Nome" required formControlName="password">
+   <div
+    *ngIf="novoUsuario.get('email')?.errors?.required && novoUsuario.get('email')?touched"
+   >Esse campo é obrigatorio</div>
+ </form>
+ `````
+ 
+ ## validação customizada
+ - Criar um arquivo ts
+ ````
+ export function minusculoValidator(control: AbstractControl){
+   const valor = control.value as string
+   if(valor == valor.toLowerCase()){
+   return true
+   }else{
+   return false
+   }
+ }
+ `````
  
  
  
