@@ -92,7 +92,7 @@
    <input type="text" placeholder="Nome" required formControlName="userName">
    <input type="password" placeholder="Nome" required formControlName="password">
    <div
-    *ngIf="novoUsuario.get('email')?.errors?.required && novoUsuario.get('email')?touched"
+   *ngIf="task.get('text')?.errors?.['required'] && task.get('text')?.touched"
    >Esse campo é obrigatorio</div>
  </form>
  `````
